@@ -67,26 +67,25 @@ tap_dance_action_t tap_dance_actions[] = {
 
 enum custom_keycodes {
     // IntelliJ specific
-    IJ_F_ACTION = SAFE_RANGE, // Find Action (Cmd+Shift+A)
-    IJ_GOTO_C,              // Go to Class (Cmd+O)
-    IJ_GOTO_F,              // Go to File (Cmd+Shift+O)
-    IJ_REFACTOR,            // Refactor This (Ctrl+T)
-    IJ_RUN,                 // Run (Ctrl+R)
-    IJ_DEBUG,               // Debug (Ctrl+D)
-    IJ_TERM,                // Open Terminal (Opt+F12)
+    IJ_F_ACTION = SAFE_RANGE,
+    IJ_GOTO_C,
+    IJ_GOTO_F,
+    IJ_REFACTOR,
+    IJ_RUN,
+    IJ_DEBUG,
+    IJ_TERM,
 
     // macOS specific
-    MC_TAB,                 // App Switcher (Cmd+Tab)
-    MC_SPOT,                // Spotlight (Cmd+Space)
-    MC_MISSION,             // Mission Control (Ctrl+Up)
+    MC_TAB,
+    MC_SPOT,
+    MC_MISSION,
     MC_SS_MENU,
-    MC_SS_SEL,
-    MC_SS_FULL,             // Screenshot Menu (Cmd+Shift+5)
-    MC_SS_SEL,              // Screenshot Selection (Cmd+Shift+4)
-    MC_HIDE,                // Hide Application (Cmd+H)
-    MC_QUIT,                // Quit Application (Cmd+Q)
-    MC_FORCE_Q,              // Force Quit Menu (Cmd+Opt+Esc)
-    MC_AI                   // Open apple inteligencet
+    MC_SS_SEL,   // Screenshot Selection (Cmd+Shift+4)  <-- SOLO UNA VEZ
+    MC_HIDE,
+    MC_QUIT,
+    MC_FORCE_Q,
+    MC_AI,
+    MC_SS_FULL
 };
 
 // Use standard US keyboard layout for macOS
@@ -195,7 +194,7 @@ KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     KC_NO,   KC_HOME, KC_UP
  * _NUM: Numpad Layer (toggle-friendly)
  */
 [_NUM] = LAYOUT_split_3x6_3(
-KC_ESC,  KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,    KC_NO,   KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,
+    KC_ESC,  KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,    KC_NO,   KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,
     KC_TAB,  KC_4,    KC_5,    KC_6,    KC_PAST, KC_PSLS,    KC_NO,   KC_4,    KC_5,    KC_6,    KC_PAST, KC_PSLS,
     KC_LSFT, KC_1,    KC_2,    KC_3,    KC_0,    KC_DOT,     KC_NO,   KC_1,    KC_2,    KC_3,    KC_0,    KC_ENT,
                     TH_CAPS, TH_LM_NUM, TH_ENT,                       TH_SPC, TH_RM_NUM, TH_OPT
@@ -205,13 +204,12 @@ KC_ESC,  KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,    KC_NO,   KC_7,    KC_8,
  * _FUN: Keyboard Settings & Media Layer
  */
 [_FUN] = LAYOUT_split_3x6_3(
-QK_BOOT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-    RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, KC_F12,     KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_MUTE,
-    MC_SPOT, MC_MISSION, MC_SS_MENU,
-    MC_SS_SEL,
-    MC_SS_FULL, MC_SS_SEL, MC_TAB, KC_NO, IJ_F_ACTION, IJ_GOTO_C, IJ_GOTO_F, IJ_REFACTOR, IJ_RUN, IJ_DEBUG,
-                    TH_CAPS, TH_LM_FUN, TH_ENT,                       TH_SPC, TH_RM_FUN, TH_OPT
+    QK_BOOT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, KC_F12,        KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_MUTE,
+    MC_SPOT, MC_MISSION, MC_SS_MENU, MC_SS_SEL, MC_TAB, KC_NO,  IJ_F_ACTION, IJ_GOTO_C, IJ_GOTO_F, IJ_REFACTOR, IJ_RUN, IJ_DEBUG,
+                        TH_CAPS, TH_LM_FUN, TH_ENT,                       TH_SPC, TH_RM_FUN, TH_OPT
 )
+
 };
 
 // Handle custom keycodes
@@ -225,23 +223,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case IJ_RUN:      SEND_STRING(SS_LCTL("r")); return false;
             case IJ_DEBUG:    SEND_STRING(SS_LCTL("d")); return false;
             case IJ_TERM:     SEND_STRING(SS_LALT(SS_TAP(X_F12))); return false;
-            
             case MC_SPOT:     SEND_STRING(SS_LGUI(SS_TAP(X_SPC))); return false;
             case MC_MISSION:  SEND_STRING(SS_LCTL(SS_TAP(X_UP))); return false;
             case MC_SS_MENU:  SEND_STRING(SS_LGUI(SS_LSFT("5"))); return false;
-    case MC_SS_SEL:   SEND_STRING(SS_LGUI(SS_LSFT("4"))); return false;
-    case MC_SS_FULL:  SEND_STRING(SS_LGUI(SS_LSFT("3"))); return false;
-  SEND_STRING(SS_LGUI(SS_LSFT("5"))); return false;
+            case MC_SS_FULL:  SEND_STRING(SS_LGUI(SS_LSFT("3"))); return false;
             case MC_SS_SEL:   SEND_STRING(SS_LGUI(SS_LSFT("4"))); return false;
             case MC_HIDE:     SEND_STRING(SS_LGUI("h")); return false;
             case MC_QUIT:     SEND_STRING(SS_LGUI("q")); return false;
             case MC_FORCE_Q:  SEND_STRING(SS_LGUI(SS_LALT(SS_TAP(X_ESC)))); return false;
             case MC_AI:       tap_code(KC_LGUI); tap_code(KC_LGUI); return false;
-
-            case MC_TAB: // App Switcher (Cmd+Tab)
-                register_code(KC_LGUI);
-                tap_code(KC_TAB);
-                return false;
+            case MC_TAB:      register_code(KC_LGUI); tap_code(KC_TAB); return false;
         }
     } else { // on keyup
         switch (keycode) {
