@@ -173,10 +173,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * _NAV: Navigation & Editing (toggle-friendly)
  */
 [_NAV] = LAYOUT_split_3x6_3(
-KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,
+KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, _______,
     KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_BSPC,    KC_NO,   LSFT(KC_LEFT), LSFT(KC_DOWN), LSFT(KC_UP), LSFT(KC_RGHT), KC_BSPC,
-    KC_LSFT, LALT(KC_LEFT), LALT(KC_RGHT), LGUI(KC_LEFT), LGUI(KC_RGHT), KC_ENT,  LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_S), KC_RSFT,
-                    TH_CAPS, TH_LM_NAV, TH_ENT,                       TH_SPC, TH_RM_NAV, TH_OPT
+    _______, LALT(KC_LEFT), LALT(KC_RGHT), LGUI(KC_LEFT), LGUI(KC_RGHT), KC_ENT,  LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_S), _______,
+                    _______, TH_LM_NAV, _______,                       _______, TH_RM_NAV, _______
 ),
 
 /*
@@ -184,30 +184,30 @@ KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     KC_NO,   KC_HOME, KC_UP
  */
 [_SYM] = LAYOUT_split_3x6_3(
     // Programming + terminal symbols (with optional tap-dance)
-    KC_LPRN, KC_LCBR, KC_LBRC, KC_LT,   TD_EQEQ_K, TD_NEQ_K,     KC_NO,   KC_DLR,  KC_TILD, KC_ASTR, TD_AND2_K, KC_BSPC,
+    KC_LPRN, KC_LCBR, KC_LBRC, KC_LT,   TD_EQEQ_K, TD_NEQ_K,     KC_NO,   KC_DLR,  KC_TILD, KC_ASTR, TD_AND2_K, _______,
     TD_ARROW_K, KC_UNDS, KC_PLUS, KC_SLSH, KC_BSLS, TD_PIPE2_K,  KC_NO,   KC_QUES, KC_COLN, KC_SCLN, KC_COMM,  TD_FATARROW_K,
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, KC_CIRC,       KC_NO,   KC_DQUO, KC_QUOT, KC_DOT,  KC_MINS,  KC_RPRN,
-                        TH_CAPS, TH_LM_SYM, TH_ENT,                       TH_SPC, TH_RM_SYM, TH_OPT
+                        _______, TH_LM_SYM, _______,                       _______, TH_RM_SYM, _______
 ),
 
 /*
  * _NUM: Numpad Layer (toggle-friendly)
  */
 [_NUM] = LAYOUT_split_3x6_3(
-    KC_ESC,  KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,    KC_NO,   KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,
+    KC_ESC,  KC_7,    KC_8,    KC_9,    KC_PMNS, KC_PPLS,    KC_NO,   KC_7,    KC_8,    KC_9,    KC_PMNS, _______,
     KC_TAB,  KC_4,    KC_5,    KC_6,    KC_PAST, KC_PSLS,    KC_NO,   KC_4,    KC_5,    KC_6,    KC_PAST, KC_PSLS,
-    KC_LSFT, KC_1,    KC_2,    KC_3,    KC_0,    KC_DOT,     KC_NO,   KC_1,    KC_2,    KC_3,    KC_0,    KC_ENT,
-                    TH_CAPS, TH_LM_NUM, TH_ENT,                       TH_SPC, TH_RM_NUM, TH_OPT
+    _______, KC_1,    KC_2,    KC_3,    KC_0,    KC_DOT,     KC_NO,   KC_1,    KC_2,    KC_3,    KC_0,    KC_ENT,
+                    _______, TH_LM_NUM, _______,                       _______, TH_RM_NUM, _______
 ),
 
 /*
  * _FUN: Keyboard Settings & Media Layer
  */
 [_FUN] = LAYOUT_split_3x6_3(
-    QK_BOOT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+    QK_BOOT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, KC_F12,        KC_MPRV, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_MUTE,
     MC_SPOT, MC_MISSION, MC_SS_MENU, MC_SS_SEL, MC_TAB, KC_NO,  IJ_F_ACTION, IJ_GOTO_C, IJ_GOTO_F, IJ_REFACTOR, IJ_RUN, IJ_DEBUG,
-                        TH_CAPS, TH_LM_FUN, TH_ENT,                       TH_SPC, TH_RM_FUN, TH_OPT
+                        _______, TH_LM_FUN, _______,                       _______, TH_RM_FUN, _______
 )
 
 };
@@ -308,20 +308,6 @@ bool oled_task_kb(void) {
 }
 
 #endif // OLED_ENABLE
-
-
-
-#ifdef ENCODER_ENABLE
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) { return false; }
-    if (index == 0) {
-        if (clockwise) { tap_code(KC_VOLU); } else { tap_code(KC_VOLD); }
-    } else if (index == 1) {
-        if (clockwise) { tap_code(KC_PGDN); } else { tap_code(KC_PGUP); }
-    }
-    return true;
-}
-#endif // ENCODER_ENABLE
 
 #ifdef COMBO_ENABLE
 const uint16_t PROGMEM ss_sel_combo[]  = {KC_E, KC_R, COMBO_END};
