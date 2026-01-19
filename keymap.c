@@ -173,9 +173,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * _NAV: Navigation & Editing (toggle-friendly)
  */
 [_NAV] = LAYOUT_split_3x6_3(
-KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, _______,
+    KC_ESC,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_DEL,     MC_AI,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, _______,
     KC_TAB,  KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_BSPC,    KC_NO,   LSFT(KC_LEFT), LSFT(KC_DOWN), LSFT(KC_UP), LSFT(KC_RGHT), KC_BSPC,
-    _______, LALT(KC_LEFT), LALT(KC_RGHT), LGUI(KC_LEFT), LGUI(KC_RGHT), KC_ENT,  LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_S), _______,
+    _______, LALT(KC_LEFT), LALT(KC_RGHT), LGUI(KC_LEFT),    LGUI(KC_RGHT), KC_ENT,  LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_S), _______,
                     _______, TH_LM_NAV, _______,                       _______, TH_RM_NAV, _______
 ),
 
